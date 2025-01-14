@@ -1,12 +1,12 @@
 import { createClient } from '@sanity/client';
 
 const client = createClient({
-  projectId: 'ybv70gf4',
-  dataset: 'production',
-  useCdn: true,
-  apiVersion: '2025-01-13',
-  token: 'skTo8gpVzSp8pMbM32s3njtYjaRhWS5Tpy8wTkG3oIqf7KJCAx4bamrIBksvAwhtNdGQzBY9yNQ5fj8O8WP6vyhpgh14wopmzAXg2IRWoLRHosbFCdqo7d3FqpOGo5a1jZP3gPHWJouOqWwWakALTYlISwbFn3zNLf72waAbpVtiDBqnxxhw',
-});
+    projectId: 'your-project-id',
+    dataset: 'production',
+    useCdn: true,
+    apiVersion: '2025-01-13',
+    token: 'your-auth-token',
+  });
 
 async function uploadImageToSanity(imageUrl) {
   try {
