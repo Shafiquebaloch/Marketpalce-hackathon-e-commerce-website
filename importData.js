@@ -1,12 +1,12 @@
 import { createClient } from '@sanity/client';
 
 const client = createClient({
-    projectId: 'your-project-id',
-    dataset: 'production',
-    useCdn: true,
-    apiVersion: '2025-01-13',
-    token: 'your-auth-token',
-  });
+  projectId: 'ybv70gf4',
+  dataset: 'production',
+  useCdn: true,
+  apiVersion: '2025-01-13',
+  token: 'skNNM2tLNuk2UBC59q6Q2E8BTG214pnVBg7xWdDppyvIyp2rO1OCqXc2ztGGERTUsaA04LaVhcqxsYVri3FiTGW3QZlhaJrT7H35DO79LBuMWl0RjM0PVN6SlJyUwn9A4O8FfOgeHaXtoFVLOGs4vCy9Zl8QO28E5tMtpouitVxAWdf7fYXI',
+});
 
 async function uploadImageToSanity(imageUrl) {
   try {
@@ -41,14 +41,15 @@ async function uploadProduct(product) {
         _type: 'product',
         title: product.title,
         price: product.price,
-        image: {
+        productImage: {
           _type: 'image',
           asset: {
             _ref: imageId,
           },
         },
         tags: product.tags,
-        dicountPercentage: product.dicountPercentage,
+        dicountPercentage: product.dicountPercentage, // Typo in field name: dicountPercentage -> discountPercentage
+        description: product.description,
         isNew: product.isNew,
       };
 
