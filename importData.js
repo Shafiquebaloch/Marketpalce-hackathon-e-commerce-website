@@ -65,7 +65,7 @@ async function uploadProduct(product) {
 
 async function importProducts() {
   try {
-    const response = await fetch('https://template1-neon-nu.vercel.app/api/products');
+    const response = await fetch('https://template6-six.vercel.app/api/products');
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
