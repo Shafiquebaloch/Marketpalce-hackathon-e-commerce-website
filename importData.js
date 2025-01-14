@@ -1,11 +1,11 @@
 import { createClient } from '@sanity/client';
 
 const client = createClient({
-  projectId: 'ybv70gf4',
+  projectId: 'your-project-id',
   dataset: 'production',
   useCdn: true,
   apiVersion: '2025-01-13',
-  token: 'skNNM2tLNuk2UBC59q6Q2E8BTG214pnVBg7xWdDppyvIyp2rO1OCqXc2ztGGERTUsaA04LaVhcqxsYVri3FiTGW3QZlhaJrT7H35DO79LBuMWl0RjM0PVN6SlJyUwn9A4O8FfOgeHaXtoFVLOGs4vCy9Zl8QO28E5tMtpouitVxAWdf7fYXI',
+  token: 'your-auth-token',
 });
 
 async function uploadImageToSanity(imageUrl) {
@@ -65,7 +65,7 @@ async function uploadProduct(product) {
 
 async function importProducts() {
   try {
-    const response = await fetch('http://localhost:3000/api/products');
+    const response = await fetch('https://template1-neon-nu.vercel.app/api/products');
     
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
