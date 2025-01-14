@@ -1,11 +1,6 @@
 import { client } from "@/sanity/lib/client";
 import { NextResponse } from "next/server";
-import { urlFor } from "@/sanity/lib/image";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-function getImageUrl(imageReference: SanityImageSource) {
-  return urlFor(imageReference).url();
-}
 
 export async function GET() {
   try {
