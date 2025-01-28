@@ -1,103 +1,97 @@
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
+import { client } from '../sanity/lib/client';
+import { urlFor } from '../sanity/lib/image';
+import HeroSection from '../components/HeroSection';
+import Link from 'next/link';
+import Navbar from '../components/Navbar'; // Import Header
+import Footer from '../components/Footer'; // Import Footer
+import Feature from '../components/Feature'; // Import Feature component
 
-
-
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+interface Product {
+  _id: string;
+  title: string;
+  price: number;
+  productImage: string;
 }
+
+const getProducts = async () => {
+  const products = await client.fetch(
+    `*[_type == "product"] {
+      _id,
+      title,
+      description,
+      price,
+      productImage,
+      tags
+    }`
+  );
+  return products;
+};
+
+const MyProducts = async () => {
+  const products = await getProducts();
+
+  // Handle empty products array
+  if (!products || products.length === 0) {
+    return <p>No products available at the moment.</p>;
+  }
+
+  return (
+    <>
+      <Navbar /> {/* Render Header */}
+      
+      <HeroSection />
+      <h1 className="text-[40px] text-center font-bold mt-14 mb-6">Our Products</h1>
+
+      {/* Responsive Product Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4">
+        {products.map((product: Product) => (
+          <div
+            key={product._id}
+            className="w-full max-w-[285px] bg-[#F4F5F7] mx-auto rounded-lg shadow-lg flex flex-col items-center"
+          >
+            {/* Product Image */}
+            {product.productImage && (
+              <div className="relative w-[285px] h-[285px]">
+                <Image
+                  src={urlFor(product.productImage).url() || '/images/default-product.jpg'} // fallback image
+                  alt={product.title}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded-lg"
+                />
+              </div>
+            )}
+
+            {/* Product Title */}
+            <h3 className="text-[24px] font-semibold text-[#3A3A3A] ml-6 mt-4">{product.title}</h3>
+
+            {/* Product Price */}
+            <div className="flex justify-center mt-2">
+              <span className="text-[16px] font-semibold text-[#3A3A3A] text-2xl">
+                Rp {product.price.toLocaleString()}
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Feature Component */}
+      <Feature /> {/* Render Feature component */}
+
+      {/* Show More Button */}
+      <div className="flex items-center justify-center mt-6">
+        <Link href={"/shop"}>
+          <button className="w-[245px] h-[48px] bg-[#FFFFFF] border border-[#B88E2F] text-[#B88E2F]">
+            Show More
+          </button>
+        </Link>
+      </div>
+
+      <Footer /> {/* Render Footer */}
+    </>
+  );
+};
+
+export default MyProducts;
