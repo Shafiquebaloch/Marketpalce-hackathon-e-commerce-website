@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { FaFacebook } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
-import { client } from '../../../sanity/lib/client';
+import { client } from '@/sanity/lib/client';
 import Image from 'next/image';
 import { useParams } from "next/navigation";
 
@@ -23,16 +23,17 @@ export default function ProductDetailPage() {
   // Moved `query` inside useEffect to avoid dependency issues
   useEffect(() => {
     if (id) {
-      const query = `*[_type == "product" && _id == $id] {
-         _id,
-  title,
-  description,
-  price,
-  "imageUrl": productImage.asset->url + "?w=500&h=500&fit=crop",
-  tags,
-  discountPercentage,
-  isNew
-      }`;
+      const query = `*[_type == "product"]{
+        _id,
+        title,
+        description,
+        price,
+        "imageUrl": productImage.asset->url + "?w=500&h=500&fit=crop",
+        tags,
+        dicountPercentage,
+        isNew
+      }`
+      
 
       const fetchProduct = async () => {
         try {
