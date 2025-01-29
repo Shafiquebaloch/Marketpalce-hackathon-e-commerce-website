@@ -5,6 +5,8 @@ import { client } from "../../sanity/lib/client";
 import { urlFor } from "../../sanity/lib/image";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import Feature from "../../components/Feature";
 // Define the type for the product image
 interface ProductImage {
   asset: {
@@ -156,6 +158,8 @@ const ShopPage = () => {
           ))}
         </div>
       )}
+      <Feature/>
+        <Footer />
     </>
   );
 };

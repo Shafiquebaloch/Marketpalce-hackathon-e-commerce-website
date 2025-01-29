@@ -17,7 +17,7 @@ interface Product {
 
 const getProducts = async () => {
   const products = await client.fetch(
-    `*[_type == "product"] {
+    `*[_type == "product"][0..7]{
       _id,
       title,
       description,
@@ -77,8 +77,7 @@ const MyProducts = async () => {
         ))}
       </div>
 
-      {/* Feature Component */}
-      <Feature /> {/* Render Feature component */}
+    
 
       {/* Show More Button */}
       <div className="flex items-center justify-center mt-6">
@@ -88,7 +87,8 @@ const MyProducts = async () => {
           </button>
         </Link>
       </div>
-
+  {/* Feature Component */}
+  <Feature /> {/* Render Feature component */}
       <Footer /> {/* Render Footer */}
     </>
   );

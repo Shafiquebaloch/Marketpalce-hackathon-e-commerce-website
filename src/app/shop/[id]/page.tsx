@@ -6,6 +6,9 @@ import { FaTwitter } from "react-icons/fa";
 import { client } from '@/sanity/lib/client';
 import Image from 'next/image';
 import { useParams } from "next/navigation";
+import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
+import Feature from "../../../components/Feature";
 
 interface IProducts {
   _id: string;
@@ -77,6 +80,7 @@ export default function ProductDetailPage() {
 
   return (
     <>
+     <Navbar />
       <nav className="bg-[#F9F1E7] h-24 mt-20 flex items-center gap-8 pl-20">
         <ul className="flex items-center gap-2 list-none">
           <li className="text-[#9F9F9F]">Home</li>
@@ -202,8 +206,8 @@ export default function ProductDetailPage() {
           <Image src={product.imageUrl} alt={product.title} width={405} height={248} />
         </div>
       </div>
-
-
+  <Feature/>
+   <Footer/>
 
     </>
   )

@@ -4,6 +4,11 @@ import Image from 'next/image';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import Link from 'next/link';
 import { client } from '../../sanity/lib/client';
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import Feature from "../../components/Feature";
+
+
 
 interface IProduct {
     _id: string;
@@ -71,6 +76,8 @@ export default function CartPage() {
     const totalPrice = cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
 
     return (
+        <> 
+        <Navbar />
         <div className="max-w-[1440px] mx-auto overflow-hidden">
             <div>
                 <Image
@@ -151,5 +158,8 @@ export default function CartPage() {
                 </div>
             </div>
         </div>
+        <Feature/>
+        <Footer />
+        </>
     );
 }
