@@ -149,7 +149,7 @@ const ShopPage = () => {
                   Rp {product.price.toLocaleString()}
                 </span>
                 <Link href={`/shop/${product._id}`}>
-                  <button className="mt-4 w-full bg-black text-white py-2 rounded-md hover:bg-gray-800 transition-all">
+                  <button className="mt-4 w-full bg-red-600 text-white py-2 rounded-md hover:bg-gray-800 transition-all">
                     View Product Detail
                   </button>
                 </Link>

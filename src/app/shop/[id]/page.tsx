@@ -107,10 +107,7 @@ export default function ProductDetailPage() {
             </div>
           ))}
         </div>
-
-
-
-        {/* Product Image Container */}
+ {/* Product Image Container */}
         <div className="bg-[#F9F1E7] w-full lg:w-1/2 h-auto flex items-center justify-center p-4 rounded-md">
           <Image src={product.imageUrl} alt={product.title} width={500} height={600} className="max-w-full h-auto" />
         </div>
