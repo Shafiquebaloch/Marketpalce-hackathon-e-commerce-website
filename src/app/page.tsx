@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Navbar from '../components/Navbar'; // Import Header
 import Footer from '../components/Footer'; // Import Footer
 import Feature from '../components/Feature'; // Import Feature component
+import Explore from '../components/explore';
 
 interface Product {
   _id: string;
@@ -87,9 +88,9 @@ const MyProducts = async () => {
           </button>
         </Link>
       </div>
-  {/* Feature Component */}
-  <Feature /> {/* Render Feature component */}
-      <Footer /> {/* Render Footer */}
+  <Explore/>
+  <Feature /> 
+      <Footer /> 
     </>
   );
 };
